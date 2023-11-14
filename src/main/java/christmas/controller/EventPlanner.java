@@ -9,6 +9,7 @@ public class EventPlanner {
 
     public void run() {
         int date = inputDate();
+
     }
 
     private int inputDate() {
