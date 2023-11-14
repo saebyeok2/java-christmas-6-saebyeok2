@@ -25,4 +25,8 @@ public enum Menu {
         this.price = price;
         this.type = type;
     }
+
+    public String getLabel() {
+        return label;
+    }
 }
