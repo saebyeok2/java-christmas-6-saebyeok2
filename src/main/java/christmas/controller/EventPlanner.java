@@ -158,5 +158,6 @@ public class EventPlanner {
         outputView.printBenefitDetails(discount);
         outputView.printTotalBenefitAmount(discount);
         outputView.printAfterDiscountAmount(discount, order.getTotalAmount());
+        outputView.printEventBadge(badge);
     }
 }
