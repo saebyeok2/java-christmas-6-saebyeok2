@@ -53,6 +53,8 @@ public class EventPlanner {
         while (true) {
             try {
                 String input = inputView.readMenu();
+                validateMenuFormat(input);
+
                 return validateMenuInput(input);
             } catch (IllegalArgumentException e) {
                 outputView.printInputMenuError();
@@ -74,16 +76,13 @@ public class EventPlanner {
         Set<String> uniqueMenus = new HashSet<>();
         int totalQuantity = 0;
 
-        validateMenuFormat(input);
         for (String item : input.split(",")) {
             String[] parts = item.split("-");
             Menu menu = findMenu(parts[0]);
             validateExistMenu(menu);
             validateDuplicateMenu(uniqueMenus, parts[0]);
-            int quantity = validateQuantity(parts[1]);
-
-            totalQuantity += quantity;
-            order.put(menu, quantity);
+            totalQuantity += validateQuantity(parts[1]);
+            order.put(menu, Integer.parseInt(parts[1]));
         }
         validateOnlyDrinkOrder(order);
         validateTotalQuantity(totalQuantity);
