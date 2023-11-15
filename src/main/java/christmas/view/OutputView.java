@@ -72,7 +72,7 @@ public class OutputView {
             System.out.printf("-%,d원%n", totalBenefits);
             return;
         }
-        System.out.println("없음");
+        System.out.println("0원");
     }
 
     public void printAfterDiscountAmount(Discount discount, int totalAmount) {
@@ -84,6 +84,7 @@ public class OutputView {
 
         System.out.printf("\n<할인 후 예상 결제 금액>%n%,d원%n", totalAmount - totalBenefits);
     }
+
 
     public void printInputDateError() {
         System.out.println("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");

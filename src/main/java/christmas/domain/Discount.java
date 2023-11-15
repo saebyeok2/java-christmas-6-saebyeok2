@@ -8,6 +8,9 @@ public class Discount {
     private int specialDiscount;
     private boolean isPresentationEvent;
 
+    public Discount() {
+    }
+
     public Discount(Order order) {
         calculateDiscount(order);
     }
