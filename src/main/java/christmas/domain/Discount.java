@@ -4,8 +4,8 @@ import java.util.Map;
 
 public class Discount {
     private int christmasDiscount;
-    private int specialDiscount;
     private int dayOfWeekDiscount;
+    private int specialDiscount;
     private boolean isPresentationEvent;
 
     public Discount(Order order) {
@@ -77,5 +77,9 @@ public class Discount {
 
     private static boolean checkPresentationEvent(Order order) {
         return order.getTotalAmount() >= 120000;
+    }
+
+    public int getTotalDiscountAmount() {
+        return christmasDiscount + dayOfWeekDiscount + specialDiscount;
     }
 }

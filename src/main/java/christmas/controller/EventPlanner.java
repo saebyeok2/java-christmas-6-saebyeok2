@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import christmas.domain.Discount;
 import christmas.domain.Menu;
 import christmas.domain.Order;
 import christmas.view.InputView;
@@ -17,6 +18,9 @@ public class EventPlanner {
         int date = getDateInput();
         Map<Menu, Integer> orderList = getMenuInput();
         Order order = new Order(date, orderList);
+        Discount discount = new Discount(order);
+
+
     }
 
     private int getDateInput() {
