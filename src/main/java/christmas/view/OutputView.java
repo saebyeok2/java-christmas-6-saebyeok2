@@ -40,19 +40,39 @@ public class OutputView {
     }
 
     public void printBenefitDetails(Discount discount) {
+        boolean hasDiscount = false;
+
         System.out.println("\n<혜택 내역>");
-        System.out.printf("크리스마스 디데이 할인: -%,d원%n", discount.getChristmasDiscount());
-        System.out.printf("평일 할인: -%,d원%n", discount.getDayOfWeekDiscount());
-        System.out.printf("특별 할인: -%,d원%n", discount.getSpecialDiscount());
+        hasDiscount |= printDiscountAmount("크리스마스 디데이 할인", discount.getChristmasDiscount());
+        hasDiscount |= printDiscountAmount("평일 할인", discount.getDayOfWeekDiscount());
+        hasDiscount |= printDiscountAmount("특별 할인", discount.getSpecialDiscount());
+
         if (discount.isPresentationEvent()) {
             System.out.println("증정 이벤트: -25,000원");
+            hasDiscount = true;
         }
+        if (!hasDiscount) {
+            System.out.println("없음");
+        }
+    }
+
+    private boolean printDiscountAmount(String label, int discountAmount) {
+        if (discountAmount > 0) {
+            System.out.printf("%s: -%,d원%n", label, discountAmount);
+            return true;
+        }
+        return false;
     }
 
     public void printTotalBenefitAmount(Discount discount) {
         int totalBenefits = discount.getTotalDiscountAmount();
 
-        System.out.printf("\n<총혜택 금액>%n%,d원%n", totalBenefits);
+        System.out.println("\n<총혜택 금액>");
+        if (totalBenefits > 0) {
+            System.out.printf("-%,d원%n", totalBenefits);
+            return;
+        }
+        System.out.println("없음");
     }
 
     public void printAfterDiscountAmount(Discount discount, int totalAmount) {
