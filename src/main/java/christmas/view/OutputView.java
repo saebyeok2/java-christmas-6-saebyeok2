@@ -1,9 +1,26 @@
 package christmas.view;
 
+import christmas.domain.Menu;
+import java.util.Map;
+
 public class OutputView {
-    public void printMenu() {
-        System.out.println("<주문 메뉴>");
-        // ...
+    public void printEventPreviewMessage() {
+        System.out.println("12월 3일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!");
+    }
+
+    public void printMenu(Map<Menu, Integer> orderList) {
+        StringBuilder menuList = new StringBuilder();
+
+        menuList.append("\n<주문 메뉴>\n");
+
+        for (Map.Entry<Menu, Integer> entry : orderList.entrySet()) {
+            menuList.append(entry.getKey().getLabel())
+                    .append(" ")
+                    .append(entry.getValue())
+                    .append("개\n");
+        }
+
+        System.out.println(menuList);
     }
 
     public void printInputDateError() {

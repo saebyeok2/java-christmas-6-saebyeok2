@@ -19,8 +19,7 @@ public class EventPlanner {
         Map<Menu, Integer> orderList = getMenuInput();
         Order order = new Order(date, orderList);
         Discount discount = new Discount(order);
-
-
+        printResults(order, discount);
     }
 
     private int getDateInput() {
@@ -140,5 +139,10 @@ public class EventPlanner {
         if (totalQuantity > 20) {
             throw new IllegalArgumentException();
         }
+    }
+
+    private void printResults(Order order, Discount discount) {
+        outputView.printEventPreviewMessage();
+        outputView.printMenu(order.getOrderList());
     }
 }
