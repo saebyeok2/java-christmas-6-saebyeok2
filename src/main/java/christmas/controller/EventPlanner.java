@@ -4,7 +4,9 @@ import christmas.domain.Menu;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class EventPlanner {
     InputView inputView = new InputView();
@@ -13,6 +15,7 @@ public class EventPlanner {
     public void run() {
         int date = inputDate();
         Map<Menu, Integer> order = inputMenu();
+        System.out.println(order);
 
     }
 
@@ -62,11 +65,13 @@ public class EventPlanner {
     private Map<Menu, Integer> validateInputMenu(String input) {
         Map<Menu, Integer> order = new HashMap<>();
         validateMenuFormat(input);
+        Set<String> uniqueMenus = new HashSet<>();
 
         for (String item : input.split(",")) {
             String[] parts = item.split("-");
             Menu menu = findMenu(parts[0]);
             validateExistMenu(menu);
+            validateDuplicateMenu(uniqueMenus, parts[0]);
             int quantity = validateQuantity(parts[1]);
             order.put(menu, quantity);
         }
@@ -99,5 +104,11 @@ public class EventPlanner {
         }
 
         return quantity;
+    }
+
+    private void validateDuplicateMenu(Set<String> uniqueMenus, String menuName) {
+        if (!uniqueMenus.add(menuName)) {
+            throw new IllegalArgumentException();
+        }
     }
 }
