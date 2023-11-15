@@ -3,12 +3,18 @@ package christmas.domain;
 import java.util.Map;
 
 public class Discount {
-    public static int calculateDiscount(int orderDate, Map<Menu, Integer> order) {
-        int christmasDiscount = calculateChristmasDiscount(orderDate);
-        int dayOfWeekDiscount = calculateDayOfWeekDiscount(orderDate, order);
-        int specialDiscount = calculateSpecialDiscount(orderDate);
-        
-        return 0;
+    private int christmasDiscount;
+    private int specialDiscount;
+    private int dayOfWeekDiscount;
+
+    public Discount(int orderDate, Map<Menu, Integer> order) {
+        calculateDiscount(orderDate, order);
+    }
+
+    public void calculateDiscount(int orderDate, Map<Menu, Integer> order) {
+        christmasDiscount = calculateChristmasDiscount(orderDate);
+        dayOfWeekDiscount = calculateDayOfWeekDiscount(orderDate, order);
+        specialDiscount = calculateSpecialDiscount(orderDate);
     }
 
     private static int calculateChristmasDiscount(int orderDate) {

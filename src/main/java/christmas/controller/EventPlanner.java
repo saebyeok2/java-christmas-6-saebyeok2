@@ -1,6 +1,7 @@
 package christmas.controller;
 
 import christmas.domain.Menu;
+import christmas.domain.Order;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import java.util.HashMap;
@@ -14,8 +15,8 @@ public class EventPlanner {
 
     public void run() {
         int date = getDateInput();
-        Map<Menu, Integer> order = getMenuInput();
-
+        Map<Menu, Integer> orderList = getMenuInput();
+        Order order = new Order(date, orderList);
     }
 
     private int getDateInput() {

@@ -3,10 +3,14 @@ package christmas.domain;
 import java.util.Map;
 
 public class Order {
-    private Map<Menu, Integer> order;
+    private int date;
+    private Map<Menu, Integer> orderList;
+    private int totalAmount;
 
-    public Order(Map<Menu, Integer> order) {
-        this.order = order;
+    public Order(int date, Map<Menu, Integer> orderList) {
+        this.date = date;
+        this.orderList = orderList;
+        totalAmount = calculateTotalAmount(orderList);
     }
 
     public int calculateTotalAmount(Map<Menu, Integer> order) {
