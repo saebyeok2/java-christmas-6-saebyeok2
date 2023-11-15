@@ -18,7 +18,7 @@ public class Discount {
     public void calculateDiscount(Order order) {
         christmasDiscount = calculateChristmasDiscount(order.getDate());
         dayOfWeekDiscount = calculateDayOfWeekDiscount(order);
-        specialDiscount = calculateSpecialDiscount(order);
+        specialDiscount = calculateSpecialDiscount(order.getDate());
         isPresentationEvent = checkPresentationEvent(order);
     }
 
@@ -65,8 +65,8 @@ public class Discount {
         return discountAmount;
     }
 
-    public int calculateSpecialDiscount(Order order) {
-        if (isStarEventDay(order.getDate())) {
+    public int calculateSpecialDiscount(int date) {
+        if (isStarEventDay(date)) {
             return 1000;
         }
 
