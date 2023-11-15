@@ -13,18 +13,19 @@ public class EventPlanner {
     OutputView outputView = new OutputView();
 
     public void run() {
-        int date = dateInput();
-        Map<Menu, Integer> order = MenuInput();
+        int date = getDateInput();
+        Map<Menu, Integer> order = getMenuInput();
 
     }
 
-    private int dateInput() {
-        try {
-            String input = inputView.readDate();
-            return validateDate(input);
-        } catch (IllegalArgumentException e) {
-            outputView.printInputDateError();
-            return dateInput();
+    private int getDateInput() {
+        while (true) {
+            try {
+                String input = inputView.readDate();
+                return validateDate(input);
+            } catch (IllegalArgumentException e) {
+                outputView.printInputDateError();
+            }
         }
     }
 
@@ -42,13 +43,14 @@ public class EventPlanner {
         }
     }
 
-    private Map<Menu, Integer> MenuInput() {
-        try {
-            String input = inputView.readMenu();
-            return validateMenuInput(input);
-        } catch (IllegalArgumentException e) {
-            outputView.printInputMenuError();
-            return MenuInput();
+    private Map<Menu, Integer> getMenuInput() {
+        while (true) {
+            try {
+                String input = inputView.readMenu();
+                return validateMenuInput(input);
+            } catch (IllegalArgumentException e) {
+                outputView.printInputMenuError();
+            }
         }
     }
 
