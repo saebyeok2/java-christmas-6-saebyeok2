@@ -35,11 +35,11 @@ public class EventPlanner {
         }
     }
 
-    private int validateDate(String input) {
+    public int validateDate(String input) {
         try {
             int date = Integer.parseInt(input);
 
-            if (date < 0 || 31 < date) {
+            if (date <= 0 || 31 < date) {
                 throw new IllegalArgumentException();
             }
 
