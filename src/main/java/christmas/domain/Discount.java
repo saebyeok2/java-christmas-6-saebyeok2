@@ -19,7 +19,7 @@ public class Discount {
         christmasDiscount = calculateChristmasDiscount(order.getDate());
         dayOfWeekDiscount = calculateDayOfWeekDiscount(order);
         specialDiscount = calculateSpecialDiscount(order.getDate());
-        isPresentationEvent = checkPresentationEvent(order);
+        isPresentationEvent = checkPresentationEvent(order.getTotalAmount());
     }
 
     public int calculateChristmasDiscount(int date) {
@@ -77,8 +77,8 @@ public class Discount {
         return orderDate % 7 == 3 || orderDate == 25;
     }
 
-    public boolean checkPresentationEvent(Order order) {
-        return order.getTotalAmount() >= 120000;
+    public boolean checkPresentationEvent(int totalAmount) {
+        return totalAmount >= 120000;
     }
 
     public boolean isPresentationEvent() {
