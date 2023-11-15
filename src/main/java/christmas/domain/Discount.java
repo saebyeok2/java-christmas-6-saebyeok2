@@ -86,7 +86,7 @@ public class Discount {
         return isPresentationEvent;
     }
 
-    public int getTotalDiscountAmount() {
+    public int getTotalBenefits() {
         int totalDiscountAmount = christmasDiscount + dayOfWeekDiscount + specialDiscount;
         if (isPresentationEvent) {
             return totalDiscountAmount + 25000;

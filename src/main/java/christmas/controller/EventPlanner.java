@@ -1,6 +1,7 @@
 package christmas.controller;
 
 import christmas.domain.Discount;
+import christmas.domain.EventBadge;
 import christmas.domain.Menu;
 import christmas.domain.Order;
 import christmas.view.InputView;
@@ -19,7 +20,8 @@ public class EventPlanner {
         Map<Menu, Integer> orderList = getMenuInput();
         Order order = new Order(date, orderList);
         Discount discount = getDiscount(order);
-        printResults(order, discount);
+        EventBadge badge = new EventBadge(discount.getTotalBenefits());
+        printResults(order, discount, badge);
     }
 
     private int getDateInput() {
@@ -148,7 +150,7 @@ public class EventPlanner {
         return new Discount();
     }
 
-    private void printResults(Order order, Discount discount) {
+    private void printResults(Order order, Discount discount, EventBadge badge) {
         outputView.printEventPreviewMessage();
         outputView.printMenu(order.getOrderList());
         outputView.printTotalOrderAmount(order.getTotalAmount());
