@@ -6,7 +6,8 @@ public class Discount {
     public static int calculateDiscount(int orderDate, Map<Menu, Integer> order) {
         int christmasDiscount = calculateChristmasDiscount(orderDate);
         int dayOfWeekDiscount = calculateDayOfWeekDiscount(orderDate, order);
-
+        int specialDiscount = calculateSpecialDiscount(orderDate);
+        
         return 0;
     }
 
@@ -51,6 +52,18 @@ public class Discount {
                 .mapToInt(entry -> entry.getValue() * 2023)
                 .sum();
         return discountAmount;
+    }
+
+    private static int calculateSpecialDiscount(int orderDate) {
+        if (isStarEventDay(orderDate)) {
+            return 1000;
+        }
+
+        return 0;
+    }
+
+    private static boolean isStarEventDay(int orderDate) {
+        return orderDate % 7 == 3 || orderDate == 25;
     }
 
 }
