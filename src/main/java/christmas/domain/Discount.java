@@ -3,8 +3,11 @@ package christmas.domain;
 import java.util.Map;
 
 public class Discount {
-    public static void calculateDiscount(int orderDate, Map<Menu, Integer> order) {
+    public static int calculateDiscount(int orderDate, Map<Menu, Integer> order) {
         int christmasDiscount = calculateChristmasDiscount(orderDate);
+        int dayOfWeekDiscount = calculateDayOfWeekDiscount(orderDate, order);
+
+        return 0;
     }
 
     private static int calculateChristmasDiscount(int orderDate) {
@@ -16,6 +19,37 @@ public class Discount {
             discountAmount = 1000 + (orderDate - 1) * 100;
         }
 
+        return discountAmount;
+    }
+
+    private static int calculateDayOfWeekDiscount(int orderDay, Map<Menu, Integer> order) {
+        int dayOfWeek = orderDay % 7;
+        int discountAmount = 0;
+
+        if (dayOfWeek == 2 || dayOfWeek == 3) {
+            discountAmount = getWeekendDiscountAmount(order);
+        }
+        if (dayOfWeek != 2 && dayOfWeek != 3) {
+            discountAmount = getWeekdayDiscountAmount(order);
+        }
+        return discountAmount;
+    }
+
+    private static int getWeekendDiscountAmount(Map<Menu, Integer> order) {
+        int discountAmount;
+        discountAmount = order.entrySet().stream()
+                .filter(entry -> entry.getKey().getType().equals("Main"))
+                .mapToInt(entry -> entry.getValue() * 2023)
+                .sum();
+        return discountAmount;
+    }
+
+    private static int getWeekdayDiscountAmount(Map<Menu, Integer> order) {
+        int discountAmount;
+        discountAmount = order.entrySet().stream()
+                .filter(entry -> entry.getKey().getType().equals("Dessert"))
+                .mapToInt(entry -> entry.getValue() * 2023)
+                .sum();
         return discountAmount;
     }
 
