@@ -13,19 +13,19 @@ public class EventPlanner {
     OutputView outputView = new OutputView();
 
     public void run() {
-        int date = inputDate();
-        Map<Menu, Integer> order = inputMenu();
+        int date = dateInput();
+        Map<Menu, Integer> order = MenuInput();
         System.out.println(order);
 
     }
 
-    private int inputDate() {
+    private int dateInput() {
         try {
             String input = inputView.readDate();
             return validateDate(input);
         } catch (IllegalArgumentException e) {
             outputView.printInputDateError();
-            return inputDate();
+            return dateInput();
         }
     }
 
@@ -43,13 +43,13 @@ public class EventPlanner {
         }
     }
 
-    private Map<Menu, Integer> inputMenu() {
+    private Map<Menu, Integer> MenuInput() {
         try {
             String input = inputView.readMenu();
-            return validateInputMenu(input);
+            return validateMenuInput(input);
         } catch (IllegalArgumentException e) {
             outputView.printInputMenuError();
-            return inputMenu();
+            return MenuInput();
         }
     }
 
@@ -62,7 +62,7 @@ public class EventPlanner {
         return null;
     }
 
-    private Map<Menu, Integer> validateInputMenu(String input) {
+    private Map<Menu, Integer> validateMenuInput(String input) {
         Map<Menu, Integer> order = new HashMap<>();
         validateMenuFormat(input);
         Set<String> uniqueMenus = new HashSet<>();
