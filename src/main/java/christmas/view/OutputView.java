@@ -1,6 +1,7 @@
 package christmas.view;
 
 import christmas.domain.Menu;
+import java.text.DecimalFormat;
 import java.util.Map;
 
 public class OutputView {
@@ -23,6 +24,11 @@ public class OutputView {
         System.out.println(menuList);
     }
 
+    public void printTotalOrderAmount(int totalAmount) {
+        DecimalFormat decimalFormat = new DecimalFormat("#,###원");
+        System.out.println("<할인 전 총주문 금액>\n" + decimalFormat.format(totalAmount));
+    }
+    
     public void printInputDateError() {
         System.out.println("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
     }

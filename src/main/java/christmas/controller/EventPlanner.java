@@ -144,5 +144,7 @@ public class EventPlanner {
     private void printResults(Order order, Discount discount) {
         outputView.printEventPreviewMessage();
         outputView.printMenu(order.getOrderList());
+        outputView.printTotalOrderAmount(order.getTotalAmount());
+
     }
 }
