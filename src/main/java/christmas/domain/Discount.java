@@ -84,6 +84,22 @@ public class Discount {
     }
 
     public int getTotalDiscountAmount() {
-        return christmasDiscount + dayOfWeekDiscount + specialDiscount;
+        int totalDiscountAmount = christmasDiscount + dayOfWeekDiscount + specialDiscount;
+        if (isPresentationEvent) {
+            return totalDiscountAmount + 25000;
+        }
+        return totalDiscountAmount;
+    }
+
+    public int getChristmasDiscount() {
+        return christmasDiscount;
+    }
+
+    public int getDayOfWeekDiscount() {
+        return dayOfWeekDiscount;
+    }
+
+    public int getSpecialDiscount() {
+        return specialDiscount;
     }
 }

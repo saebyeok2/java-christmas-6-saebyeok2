@@ -146,5 +146,7 @@ public class EventPlanner {
         outputView.printMenu(order.getOrderList());
         outputView.printTotalOrderAmount(order.getTotalAmount());
         outputView.printPresentationEvent(discount.isPresentationEvent());
+        outputView.printBenefitDetails(discount);
+        outputView.printTotalBenefitAmount(discount);
     }
 }
