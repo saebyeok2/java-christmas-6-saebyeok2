@@ -79,6 +79,10 @@ public class Discount {
         return order.getTotalAmount() >= 120000;
     }
 
+    public boolean isPresentationEvent() {
+        return isPresentationEvent;
+    }
+
     public int getTotalDiscountAmount() {
         return christmasDiscount + dayOfWeekDiscount + specialDiscount;
     }

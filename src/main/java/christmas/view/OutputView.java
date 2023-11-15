@@ -28,7 +28,16 @@ public class OutputView {
         DecimalFormat decimalFormat = new DecimalFormat("#,###원");
         System.out.println("<할인 전 총주문 금액>\n" + decimalFormat.format(totalAmount));
     }
-    
+
+    public void printPresentationEvent(boolean isPresentationEvent) {
+        System.out.println("\n<증정 메뉴>");
+        if (isPresentationEvent) {
+            System.out.println("샴페인 1개");
+            return;
+        }
+        System.out.println("없음");
+    }
+
     public void printInputDateError() {
         System.out.println("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
     }
