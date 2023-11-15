@@ -18,9 +18,11 @@ public class EventPlanner {
     public void run() {
         int date = getDateInput();
         Map<Menu, Integer> orderList = getMenuInput();
+
         Order order = new Order(date, orderList);
         Discount discount = getDiscount(order);
         EventBadge badge = new EventBadge(discount.getTotalBenefits());
+
         printResults(order, discount, badge);
     }
 
@@ -68,6 +70,7 @@ public class EventPlanner {
                 return menu;
             }
         }
+
         return null;
     }
 
@@ -142,6 +145,7 @@ public class EventPlanner {
         if (order.getTotalAmount() > 10000) {
             return new Discount(order);
         }
+        
         return new Discount();
     }
 
