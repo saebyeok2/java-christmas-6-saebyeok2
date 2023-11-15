@@ -69,7 +69,7 @@ public class EventPlanner {
         return null;
     }
 
-    private Map<Menu, Integer> validateMenuInput(String input) {
+    public Map<Menu, Integer> validateMenuInput(String input) {
         Map<Menu, Integer> order = new HashMap<>();
         Set<String> uniqueMenus = new HashSet<>();
         int totalQuantity = 0;
