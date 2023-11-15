@@ -13,7 +13,7 @@ public class EventPlanner {
     public void run() {
         int date = inputDate();
         Map<Menu, Integer> order = inputMenu();
-        
+
     }
 
     private int inputDate() {
@@ -41,26 +41,13 @@ public class EventPlanner {
     }
 
     private Map<Menu, Integer> inputMenu() {
-        String input = inputView.readMenu();
-        Map<Menu, Integer> order = processOrder(input);
-
-        return order;
-    }
-
-    private Map<Menu, Integer> processOrder(String input) {
-        Map<Menu, Integer> order = new HashMap<>();
-
-        for (String item : input.split(",")) {
-            String[] parts = item.split("-");
-            if (parts.length == 2) {
-                Menu menu = findMenu(parts[0]);
-                if (menu != null) {
-                    order.put(menu, Integer.parseInt(parts[1]));
-                }
-            }
+        try {
+            String input = inputView.readMenu();
+            return validateInputMenu(input);
+        } catch (IllegalArgumentException e) {
+            outputView.printInputMenuError();
+            return inputMenu();
         }
-
-        return order;
     }
 
     private Menu findMenu(String menuName) {
@@ -72,4 +59,45 @@ public class EventPlanner {
         return null;
     }
 
+    private Map<Menu, Integer> validateInputMenu(String input) {
+        Map<Menu, Integer> order = new HashMap<>();
+        validateMenuFormat(input);
+
+        for (String item : input.split(",")) {
+            String[] parts = item.split("-");
+            Menu menu = findMenu(parts[0]);
+            validateExistMenu(menu);
+            int quantity = validateQuantity(parts[1]);
+            order.put(menu, quantity);
+        }
+
+        return order;
+    }
+
+    private void validateMenuFormat(String input) {
+        if (!input.matches("([가-힣]+-[1-9][0-9]*)+(,([가-힣]+-[1-9][0-9]*))*")) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void validateExistMenu(Menu menu) {
+        if (menu == null) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private int validateQuantity(String quantityStr) {
+        int quantity;
+
+        try {
+            quantity = Integer.parseInt(quantityStr);
+            if (quantity <= 0) {
+                throw new IllegalArgumentException();
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
+
+        return quantity;
+    }
 }

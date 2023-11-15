@@ -29,4 +29,12 @@ public enum Menu {
     public String getLabel() {
         return label;
     }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public String getType() {
+        return type;
+    }
 }
