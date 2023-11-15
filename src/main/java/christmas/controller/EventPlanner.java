@@ -65,6 +65,7 @@ public class EventPlanner {
         Map<Menu, Integer> order = new HashMap<>();
         validateMenuFormat(input);
         Set<String> uniqueMenus = new HashSet<>();
+        int totalQuantity = 0;
 
         for (String item : input.split(",")) {
             String[] parts = item.split("-");
@@ -72,9 +73,12 @@ public class EventPlanner {
             validateExistMenu(menu);
             validateDuplicateMenu(uniqueMenus, parts[0]);
             int quantity = validateQuantity(parts[1]);
+
+            totalQuantity += quantity;
             order.put(menu, quantity);
         }
         validateOnlyDrinkOrder(order);
+        validateTotalQuantity(totalQuantity);
 
         return order;
     }
@@ -117,6 +121,12 @@ public class EventPlanner {
                 .anyMatch(menu -> !menu.getType().equals("Drink"));
 
         if (!hasDrink) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void validateTotalQuantity(int totalQuantity) {
+        if (totalQuantity > 20) {
             throw new IllegalArgumentException();
         }
     }
