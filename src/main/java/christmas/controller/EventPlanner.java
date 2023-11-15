@@ -97,10 +97,6 @@ public class EventPlanner {
         }
     }
 
-    private void splitMenuInput(String input) {
-
-    }
-
     private void validateExistMenu(Menu menu) {
         if (menu == null) {
             throw new IllegalArgumentException();
