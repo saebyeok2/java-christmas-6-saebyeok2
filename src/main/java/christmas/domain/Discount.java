@@ -6,21 +6,24 @@ public class Discount {
     private int christmasDiscount;
     private int specialDiscount;
     private int dayOfWeekDiscount;
+    private boolean isPresentationEvent;
 
-    public Discount(int orderDate, Map<Menu, Integer> order) {
-        calculateDiscount(orderDate, order);
+    public Discount(Order order) {
+        calculateDiscount(order);
     }
 
-    public void calculateDiscount(int orderDate, Map<Menu, Integer> order) {
-        christmasDiscount = calculateChristmasDiscount(orderDate);
-        dayOfWeekDiscount = calculateDayOfWeekDiscount(orderDate, order);
-        specialDiscount = calculateSpecialDiscount(orderDate);
+    public void calculateDiscount(Order order) {
+        christmasDiscount = calculateChristmasDiscount(order);
+        dayOfWeekDiscount = calculateDayOfWeekDiscount(order);
+        specialDiscount = calculateSpecialDiscount(order);
+        isPresentationEvent = checkPresentationEvent(order);
     }
 
-    private static int calculateChristmasDiscount(int orderDate) {
+    private static int calculateChristmasDiscount(Order order) {
         int christmasStart = 1;
         int christmasEnd = 25;
         int discountAmount = 0;
+        int orderDate = order.getDate();
 
         if (orderDate >= christmasStart && orderDate <= christmasEnd) {
             discountAmount = 1000 + (orderDate - 1) * 100;
@@ -29,15 +32,15 @@ public class Discount {
         return discountAmount;
     }
 
-    private static int calculateDayOfWeekDiscount(int orderDay, Map<Menu, Integer> order) {
-        int dayOfWeek = orderDay % 7;
+    private static int calculateDayOfWeekDiscount(Order order) {
+        int dayOfWeek = order.getDate() % 7;
         int discountAmount = 0;
 
         if (dayOfWeek == 2 || dayOfWeek == 3) {
-            discountAmount = getWeekendDiscountAmount(order);
+            discountAmount = getWeekendDiscountAmount(order.getOrderList());
         }
         if (dayOfWeek != 2 && dayOfWeek != 3) {
-            discountAmount = getWeekdayDiscountAmount(order);
+            discountAmount = getWeekdayDiscountAmount(order.getOrderList());
         }
         return discountAmount;
     }
@@ -60,8 +63,8 @@ public class Discount {
         return discountAmount;
     }
 
-    private static int calculateSpecialDiscount(int orderDate) {
-        if (isStarEventDay(orderDate)) {
+    private static int calculateSpecialDiscount(Order order) {
+        if (isStarEventDay(order.getDate())) {
             return 1000;
         }
 
@@ -72,4 +75,7 @@ public class Discount {
         return orderDate % 7 == 3 || orderDate == 25;
     }
 
+    private static boolean checkPresentationEvent(Order order) {
+        return order.getTotalAmount() >= 120000;
+    }
 }

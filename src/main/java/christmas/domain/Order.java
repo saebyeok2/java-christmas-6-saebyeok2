@@ -18,4 +18,16 @@ public class Order {
                 .mapToInt(entry -> entry.getKey().getPrice() * entry.getValue())
                 .sum();
     }
+
+    public int getDate() {
+        return date;
+    }
+
+    public Map<Menu, Integer> getOrderList() {
+        return orderList;
+    }
+
+    public int getTotalAmount() {
+        return totalAmount;
+    }
 }
