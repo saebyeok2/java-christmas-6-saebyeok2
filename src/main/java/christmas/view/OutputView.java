@@ -55,6 +55,16 @@ public class OutputView {
         System.out.printf("\n<총혜택 금액>%n%,d원%n", totalBenefits);
     }
 
+    public void printAfterDiscountAmount(Discount discount, int totalAmount) {
+        int totalBenefits = discount.getTotalDiscountAmount();
+
+        if (discount.isPresentationEvent()) {
+            totalBenefits -= 25000;
+        }
+
+        System.out.printf("\n<할인 후 예상 결제 금액>%n%,d원%n", totalAmount - totalBenefits);
+    }
+
     public void printInputDateError() {
         System.out.println("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
     }
