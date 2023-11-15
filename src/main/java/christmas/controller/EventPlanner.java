@@ -38,7 +38,7 @@ public class EventPlanner {
             }
 
             return date;
-        } catch (IllegalArgumentException e) {
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }
     }
@@ -65,10 +65,10 @@ public class EventPlanner {
 
     private Map<Menu, Integer> validateMenuInput(String input) {
         Map<Menu, Integer> order = new HashMap<>();
-        validateMenuFormat(input);
         Set<String> uniqueMenus = new HashSet<>();
         int totalQuantity = 0;
 
+        validateMenuFormat(input);
         for (String item : input.split(",")) {
             String[] parts = item.split("-");
             Menu menu = findMenu(parts[0]);
@@ -89,6 +89,10 @@ public class EventPlanner {
         if (!input.matches("([가-힣]+-[1-9][0-9]*)+(,([가-힣]+-[1-9][0-9]*))*")) {
             throw new IllegalArgumentException();
         }
+    }
+
+    private void splitMenuInput(String input) {
+
     }
 
     private void validateExistMenu(Menu menu) {
