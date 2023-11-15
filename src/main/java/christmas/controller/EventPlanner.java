@@ -15,7 +15,6 @@ public class EventPlanner {
     public void run() {
         int date = dateInput();
         Map<Menu, Integer> order = MenuInput();
-        System.out.println(order);
 
     }
 
@@ -75,6 +74,7 @@ public class EventPlanner {
             int quantity = validateQuantity(parts[1]);
             order.put(menu, quantity);
         }
+        validateOnlyDrinkOrder(order);
 
         return order;
     }
@@ -108,6 +108,15 @@ public class EventPlanner {
 
     private void validateDuplicateMenu(Set<String> uniqueMenus, String menuName) {
         if (!uniqueMenus.add(menuName)) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void validateOnlyDrinkOrder(Map<Menu, Integer> order) {
+        boolean hasDrink = order.keySet().stream()
+                .anyMatch(menu -> !menu.getType().equals("Drink"));
+
+        if (!hasDrink) {
             throw new IllegalArgumentException();
         }
     }
